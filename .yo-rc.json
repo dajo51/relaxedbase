@@ -1,0 +1,49 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "org.relaxedbase"
+    },
+    "jhipsterVersion": "6.10.5",
+    "applicationType": "monolith",
+    "baseName": "relaxedbase",
+    "packageName": "org.relaxedbase",
+    "packageFolder": "org/relaxedbase",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "no",
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "NWFiM2FmY2YwMjdmMjY3MTljY2U4YjY4NWMxMTcwNmNiYjJiM2RmYTc5MTQ2N2E4NGNhZmQyYWNmYzE0MDMxMDM5NDQzZmZkYWQ3ZWZlMGNhNTNhMjcwMTAyNjdmODExMTJjMmJhMTc3ZTk5YWVjOGVkMTBiZDA5NGNhNzg0ZGY=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "react",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "creationTimestamp": 1615565603254,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [
+      {
+        "name": "generator-jhipster-kotlin",
+        "version": "1.11.0"
+      }
+    ],
+    "enableTranslation": false,
+    "blueprints": [
+      {
+        "name": "generator-jhipster-kotlin",
+        "version": "1.11.0"
+      }
+    ]
+  }
+}
