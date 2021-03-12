@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity VacationRequest.
+    -->
+    <changeSet id="20210312165633-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="applicant_id"
+                                 baseTableName="vacation_request"
+                                 constraintName="fk_vacation_request_applicant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="employee"/>
+
+        <addForeignKeyConstraint baseColumnNames="stand_in_id"
+                                 baseTableName="vacation_request"
+                                 constraintName="fk_vacation_request_stand_in_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="employee"/>
+
+    </changeSet>
+</databaseChangeLog>

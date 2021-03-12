@@ -1,0 +1,76 @@
+{
+  "name": "Employee",
+  "fields": [
+    {
+      "fieldName": "firstName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "team",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "position",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "vacationRequest",
+      "otherEntityRelationshipName": "applicant",
+      "relationshipName": "vacationRequest"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "vacationRequest",
+      "otherEntityRelationshipName": "standIn",
+      "relationshipName": "vacationRequest"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "sickLeave",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "sickLeave"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "participant",
+      "relationshipName": "event"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "host",
+      "relationshipName": "event"
+    }
+  ],
+  "changelogDate": "20210312165933",
+  "entityTableName": "employee",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

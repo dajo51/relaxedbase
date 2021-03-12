@@ -1,0 +1,43 @@
+entity VacationRequest {
+	status Boolean
+    startDate ZonedDateTime
+    endDate ZonedDateTime
+}
+
+entity SickLeave {
+    startDate ZonedDateTime
+    endDate ZonedDateTime
+}
+
+entity Event {
+	title String,
+	description String,
+	location String,
+    startDate ZonedDateTime
+    endDate ZonedDateTime
+    inviteOnly Boolean
+}
+
+entity Employee {
+	firstName String,
+	lastName String,
+	email String,
+	phoneNumber String,
+    team String,
+    id String
+}
+
+relationship OneToOne {
+	Employee{position} to Employee
+}
+
+relationship OneToMany {
+	Employee to VacationRequest{applicant},
+    Employee to VacationRequest{standIn},
+    Employee to SickLeave{employee},
+    Employee to Event{participant}
+    Employee to Event{host}
+}
+
+paginate Event, VacationRequest, SickLeave, Employee with infinite-scroll
+paginate Event, VacationRequest, SickLeave, Employee with pagination
