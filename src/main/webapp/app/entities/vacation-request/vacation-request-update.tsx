@@ -27,6 +27,17 @@ export const VacationRequestUpdate = (props: IVacationRequestUpdateProps) => {
     props.history.push('/vacation-request' + props.location.search);
   };
 
+  const checkbox = () => {
+    return (
+      <AvGroup check>
+        <Label id="statusLabel">
+          <AvInput id="vacation-request-status" type="checkbox" className="form-check-input" name="status" />
+          Status
+        </Label>
+      </AvGroup>
+    )
+  }
+
   useEffect(() => {
     if (isNew) {
       props.reset();
@@ -65,7 +76,7 @@ export const VacationRequestUpdate = (props: IVacationRequestUpdateProps) => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="relaxedbaseApp.vacationRequest.home.createOrEditLabel">Create or edit a VacationRequest</h2>
+          <h2 id="relaxedbaseApp.vacationRequest.home.createOrEditLabel">Erstelle einen neuen Urlaubsantrag</h2>
         </Col>
       </Row>
       <Row className="justify-content-center">
@@ -80,15 +91,10 @@ export const VacationRequestUpdate = (props: IVacationRequestUpdateProps) => {
                   <AvInput id="vacation-request-id" type="text" className="form-control" name="id" required readOnly />
                 </AvGroup>
               ) : null}
-              <AvGroup check>
-                <Label id="statusLabel">
-                  <AvInput id="vacation-request-status" type="checkbox" className="form-check-input" name="status" />
-                  Status
-                </Label>
-              </AvGroup>
+              {props.vacationRequestEntity.id !== undefined? checkbox : ""}
               <AvGroup>
                 <Label id="startDateLabel" for="vacation-request-startDate">
-                  Start Date
+                  Startdatum
                 </Label>
                 <AvInput
                   id="vacation-request-startDate"
@@ -101,7 +107,7 @@ export const VacationRequestUpdate = (props: IVacationRequestUpdateProps) => {
               </AvGroup>
               <AvGroup>
                 <Label id="endDateLabel" for="vacation-request-endDate">
-                  End Date
+                  Enddatum
                 </Label>
                 <AvInput
                   id="vacation-request-endDate"
@@ -113,26 +119,13 @@ export const VacationRequestUpdate = (props: IVacationRequestUpdateProps) => {
                 />
               </AvGroup>
               <AvGroup>
-                <Label for="vacation-request-applicant">Applicant</Label>
-                <AvInput id="vacation-request-applicant" type="select" className="form-control" name="applicant.id">
-                  <option value="" key="0" />
-                  {employees
-                    ? employees.map(otherEntity => (
-                        <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.id}
-                        </option>
-                      ))
-                    : null}
-                </AvInput>
-              </AvGroup>
-              <AvGroup>
-                <Label for="vacation-request-standIn">Stand In</Label>
+                <Label for="vacation-request-standIn">Vertretung</Label>
                 <AvInput id="vacation-request-standIn" type="select" className="form-control" name="standIn.id">
                   <option value="" key="0" />
                   {employees
                     ? employees.map(otherEntity => (
                         <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.id}
+                          {otherEntity.firstName} {otherEntity.lastName}
                         </option>
                       ))
                     : null}
@@ -141,12 +134,12 @@ export const VacationRequestUpdate = (props: IVacationRequestUpdateProps) => {
               <Button tag={Link} id="cancel-save" to="/vacation-request" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
-                <span className="d-none d-md-inline">Back</span>
+                <span className="d-none d-md-inline">Zurück</span>
               </Button>
               &nbsp;
               <Button color="primary" id="save-entity" type="submit" disabled={updating}>
                 <FontAwesomeIcon icon="save" />
-                &nbsp; Save
+                &nbsp; Speichern
               </Button>
             </AvForm>
           )}

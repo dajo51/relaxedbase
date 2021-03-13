@@ -66,97 +66,59 @@ export const SickLeave = (props: ISickLeaveProps) => {
 
   const { sickLeaveList, match, loading, totalItems } = props;
   return (
-    <div>
-      <h2 id="sick-leave-heading">
-        Sick Leaves
-        <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-          <FontAwesomeIcon icon="plus" />
-          &nbsp; Create new Sick Leave
-        </Link>
-      </h2>
-      <div className="table-responsive">
-        {sickLeaveList && sickLeaveList.length > 0 ? (
-          <Table responsive>
-            <thead>
-              <tr>
-                <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('startDate')}>
-                  Start Date <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('endDate')}>
-                  End Date <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
-                  Employee <FontAwesomeIcon icon="sort" />
-                </th>
-                <th />
-              </tr>
-            </thead>
-            <tbody>
-              {sickLeaveList.map((sickLeave, i) => (
-                <tr key={`entity-${i}`}>
-                  <td>
-                    <Button tag={Link} to={`${match.url}/${sickLeave.id}`} color="link" size="sm">
-                      {sickLeave.id}
-                    </Button>
-                  </td>
-                  <td>{sickLeave.startDate ? <TextFormat type="date" value={sickLeave.startDate} format={APP_DATE_FORMAT} /> : null}</td>
-                  <td>{sickLeave.endDate ? <TextFormat type="date" value={sickLeave.endDate} format={APP_DATE_FORMAT} /> : null}</td>
-                  <td>{sickLeave.employee ? <Link to={`employee/${sickLeave.employee.id}`}>{sickLeave.employee.id}</Link> : ''}</td>
-                  <td className="text-right">
-                    <div className="btn-group flex-btn-group-container">
-                      <Button tag={Link} to={`${match.url}/${sickLeave.id}`} color="info" size="sm">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
-                      </Button>
-                      <Button
-                        tag={Link}
-                        to={`${match.url}/${sickLeave.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
-                        color="primary"
-                        size="sm"
-                      >
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
-                      </Button>
-                      <Button
-                        tag={Link}
-                        to={`${match.url}/${sickLeave.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
-                        color="danger"
-                        size="sm"
-                      >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
-                      </Button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        ) : (
-          !loading && <div className="alert alert-warning">No Sick Leaves found</div>
-        )}
-      </div>
-      {props.totalItems ? (
-        <div className={sickLeaveList && sickLeaveList.length > 0 ? '' : 'd-none'}>
-          <Row className="justify-content-center">
-            <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} />
-          </Row>
-          <Row className="justify-content-center">
-            <JhiPagination
-              activePage={paginationState.activePage}
-              onSelect={handlePagination}
-              maxButtons={5}
-              itemsPerPage={paginationState.itemsPerPage}
-              totalItems={props.totalItems}
-            />
-          </Row>
+        <div className={"col-sm-8 offset-sm-2"}>
+          <h2 id="vacation-request-heading">
+            Krankschreibungen
+          </h2>
+          <div className={"card-columns"}>
+            {sickLeaveList.map((sickLeave, i) => (
+              <div className="card p-0" key={`entity-${i}`}>
+                <div className={"card-header d-flex justify-content-between align-items-center mb-3"}>
+                  <h5 className="card-title mb-0">{sickLeave.startDate ? <TextFormat type="date" value={sickLeave.startDate} format={APP_LOCAL_DATE_FORMAT} /> : null} -
+                    {sickLeave.endDate ? <TextFormat type="date" value={sickLeave.endDate} format={APP_LOCAL_DATE_FORMAT} /> : null}
+                  </h5>
+                  <Button
+                    tag={Link}
+                    to={`${match.url}/${sickLeave.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
+                    color={"danger"}
+                    size={"sm"}
+                  ><FontAwesomeIcon icon="trash" />
+                  </Button>
+                </div>
+                <div className="card-body">
+                  <p className="card-text">Angestellter: {sickLeave.employee ? <Link to={`employee/${sickLeave.employee.id}`}>{sickLeave.employee.firstName}{sickLeave.employee.lastName}</Link> : ''}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div id="addButton">
+            <Link to={`${match.url}/new`} className="btn btn-primary rounded-circle btn-xl">
+              <FontAwesomeIcon icon="plus" />
+            </Link>
+          </div>
+          {props.totalItems ? (
+            <div className={sickLeaveList && sickLeaveList.length > 0 ? '' : 'd-none'}>
+              <Row className="justify-content-center">
+                <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} />
+              </Row>
+              <Row className="justify-content-center">
+                <JhiPagination
+                  activePage={paginationState.activePage}
+                  onSelect={handlePagination}
+                  maxButtons={5}
+                  itemsPerPage={paginationState.itemsPerPage}
+                  totalItems={props.totalItems}
+                />
+              </Row>
+            </div>
+          ) : (
+            ''
+          )}
         </div>
-      ) : (
-        ''
-      )}
-    </div>
-  );
-};
+        );
+        };
+
+
 
 const mapStateToProps = ({ sickLeave }: IRootState) => ({
   sickLeaveList: sickLeave.entities,
