@@ -66,97 +66,45 @@ export const VacationRequest = (props: IVacationRequestProps) => {
 
   const { vacationRequestList, match, loading, totalItems } = props;
   return (
-    <div>
+    <div className={"col-sm-8 offset-sm-2"}>
       <h2 id="vacation-request-heading">
-        Vacation Requests
-        <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-          <FontAwesomeIcon icon="plus" />
-          &nbsp; Create new Vacation Request
-        </Link>
+        Urlaubsanträge
       </h2>
-      <div className="table-responsive">
-        {vacationRequestList && vacationRequestList.length > 0 ? (
-          <Table responsive>
-            <thead>
-              <tr>
-                <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('status')}>
-                  Status <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('startDate')}>
-                  Start Date <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('endDate')}>
-                  End Date <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
-                  Applicant <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
-                  Stand In <FontAwesomeIcon icon="sort" />
-                </th>
-                <th />
-              </tr>
-            </thead>
-            <tbody>
-              {vacationRequestList.map((vacationRequest, i) => (
-                <tr key={`entity-${i}`}>
-                  <td>
-                    <Button tag={Link} to={`${match.url}/${vacationRequest.id}`} color="link" size="sm">
-                      {vacationRequest.id}
-                    </Button>
-                  </td>
-                  <td>{vacationRequest.status ? 'true' : 'false'}</td>
-                  <td>
-                    {vacationRequest.startDate ? (
-                      <TextFormat type="date" value={vacationRequest.startDate} format={APP_DATE_FORMAT} />
-                    ) : null}
-                  </td>
-                  <td>
-                    {vacationRequest.endDate ? <TextFormat type="date" value={vacationRequest.endDate} format={APP_DATE_FORMAT} /> : null}
-                  </td>
-                  <td>
-                    {vacationRequest.applicant ? (
-                      <Link to={`employee/${vacationRequest.applicant.id}`}>{vacationRequest.applicant.id}</Link>
-                    ) : (
-                      ''
-                    )}
-                  </td>
-                  <td>
-                    {vacationRequest.standIn ? <Link to={`employee/${vacationRequest.standIn.id}`}>{vacationRequest.standIn.id}</Link> : ''}
-                  </td>
-                  <td className="text-right">
-                    <div className="btn-group flex-btn-group-container">
-                      <Button tag={Link} to={`${match.url}/${vacationRequest.id}`} color="info" size="sm">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
-                      </Button>
-                      <Button
-                        tag={Link}
-                        to={`${match.url}/${vacationRequest.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
-                        color="primary"
-                        size="sm"
-                      >
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
-                      </Button>
-                      <Button
-                        tag={Link}
-                        to={`${match.url}/${vacationRequest.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
-                        color="danger"
-                        size="sm"
-                      >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
-                      </Button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        ) : (
-          !loading && <div className="alert alert-warning">No Vacation Requests found</div>
-        )}
+      <div className={"card-columns"}>
+        {vacationRequestList.map((vacationRequest, i) => (
+        <div className="card p-0 " key={`entity-${i}`}>
+          <div className={"card-header d-flex justify-content-between align-items-center mb-3"}>
+            <h5 className="card-title mb-0">{vacationRequest.startDate ? (
+              <TextFormat type="date" value={vacationRequest.startDate} format={APP_LOCAL_DATE_FORMAT} />
+            ) : null} - {vacationRequest.endDate ? <TextFormat type="date" value={vacationRequest.endDate} format={APP_LOCAL_DATE_FORMAT} /> : null}
+            </h5>
+            <Button
+              tag={Link}
+              to={`${match.url}/${vacationRequest.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
+              color={"danger"}
+              size={"sm"}
+            ><FontAwesomeIcon icon="trash" />
+            </Button>
+          </div>
+            <div className="card-body">
+              <p className="card-text">Status: {vacationRequest.status ? 'Angenommen' : 'Abgelehnt'}</p>
+              <p className="card-text">Antragsteller: {vacationRequest.applicant ? (
+                <Link to={`employee/${vacationRequest.applicant.id}`}>{vacationRequest.applicant.firstName} {vacationRequest.applicant.lastName}</Link>
+              ) : (
+                ''
+              )}</p>
+              <p className="card-text">Vertretung: {vacationRequest.standIn ? <Link to={`employee/${vacationRequest.standIn.id}`}>{vacationRequest.applicant.firstName} {vacationRequest.applicant.lastName}</Link> : ''}</p>
+            </div>
+        </div>
+          ))}
+      </div>
+
+
+
+        <div id="addButton">
+        <Link to={`${match.url}/new`} className="btn btn-primary rounded-circle btn-xl">
+          <FontAwesomeIcon icon="plus" />
+        </Link>
       </div>
       {props.totalItems ? (
         <div className={vacationRequestList && vacationRequestList.length > 0 ? '' : 'd-none'}>
@@ -177,6 +125,7 @@ export const VacationRequest = (props: IVacationRequestProps) => {
         ''
       )}
     </div>
+
   );
 };
 
