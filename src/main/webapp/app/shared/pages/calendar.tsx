@@ -1,76 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const Calendar = () => {
-  const defaultDate = "01.01.2000";
 
-  const [chartStartDate, setChartStartDate] = useState({})
-  const [chartEndDate, setChartEndDate] = useState({})
-
-  useEffect(() => {
-    getChartStart(locale).then((result) => setChartStartDate(result))
-    getChartEnd(locale).then((result) => setChartEndDate(result))
-  }, [locale] );
-
-  useEffect(() => {
-    if (!isValid(currentlySelectedDate)) {
-      setCurrentlySelectedDate(moment(defaultDate))
-    }
-  }, [chartStartDate, chartEndDate]);
-
-  const [currentlySelectedDate, setCurrentlySelectedDate] = useState(moment(defaultDate, "DD.MM.YYYY"));
-  useEffect(() => {
-      dateChangedCallback(currentlySelectedDate)
-    },
-    [currentlySelectedDate]
-  );
-
-  const decrementYear = () => {
-    setCurrentlySelectedDate((previousDate) => {
-      let newDate = previousDate.clone()
-      newDate.subtract(1, 'years')
-      if (isValid(newDate)) {
-        return newDate
-      } else {
-        return previousDate
-      }
-    })
-  };
-
-  const decrementWeek = () => {
-    setCurrentlySelectedDate((previousDate) => {
-      let newDate = previousDate.clone()
-      newDate.subtract(7, 'days')
-      if (isValid(newDate)) {
-        return newDate
-      } else {
-        return previousDate
-      }
-    })
-  };
-
-  const incrementWeek = () => {
-    setCurrentlySelectedDate((previousDate) => {
-      let newDate = previousDate.clone()
-      newDate.add(7, 'days')
-      if (isValid(newDate)) {
-        return newDate
-      } else {
-        return previousDate
-      }
-    })
-  };
-
-  const incrementYear = () => {
-    setCurrentlySelectedDate((previousDate) => {
-      let newDate = previousDate.clone()
-      newDate.add(1, 'years')
-      if (isValid(newDate)) {
-        return newDate
-      } else {
-        return previousDate
-      }
-    })
-  };
   return (
     <div className="card col-sm-6 offset-3">
       <div className="card-header justify-center">
