@@ -7,9 +7,22 @@ body {
 }
 
 #addButton {
+  background-color: #00c0e0;
+  color: white;
   position: fixed;
   bottom: 30px;
   right: 30px;
+}
+
+.btn-primary {
+  background-color: #00c0e0;
+  border-color: #00c0e0;
+}
+
+.btn-primary:hover {
+  background-color: white;
+  border-color: #00c0e0;
+  color: #00c0e0;
 }
 
 a {

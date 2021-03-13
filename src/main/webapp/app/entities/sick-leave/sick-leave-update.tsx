@@ -64,7 +64,7 @@ export const SickLeaveUpdate = (props: ISickLeaveUpdateProps) => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="relaxedbaseApp.sickLeave.home.createOrEditLabel">Create or edit a SickLeave</h2>
+          <h2 id="relaxedbaseApp.sickLeave.home.createOrEditLabel">Erstelle eine Krankschreibung</h2>
         </Col>
       </Row>
       <Row className="justify-content-center">
@@ -81,7 +81,7 @@ export const SickLeaveUpdate = (props: ISickLeaveUpdateProps) => {
               ) : null}
               <AvGroup>
                 <Label id="startDateLabel" for="sick-leave-startDate">
-                  Start Date
+                  Startdatum
                 </Label>
                 <AvInput
                   id="sick-leave-startDate"
@@ -94,7 +94,7 @@ export const SickLeaveUpdate = (props: ISickLeaveUpdateProps) => {
               </AvGroup>
               <AvGroup>
                 <Label id="endDateLabel" for="sick-leave-endDate">
-                  End Date
+                  Enddatum
                 </Label>
                 <AvInput
                   id="sick-leave-endDate"
@@ -105,28 +105,15 @@ export const SickLeaveUpdate = (props: ISickLeaveUpdateProps) => {
                   value={isNew ? displayDefaultDateTime() : convertDateTimeFromServer(props.sickLeaveEntity.endDate)}
                 />
               </AvGroup>
-              <AvGroup>
-                <Label for="sick-leave-employee">Employee</Label>
-                <AvInput id="sick-leave-employee" type="select" className="form-control" name="employee.id">
-                  <option value="" key="0" />
-                  {employees
-                    ? employees.map(otherEntity => (
-                        <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.id}
-                        </option>
-                      ))
-                    : null}
-                </AvInput>
-              </AvGroup>
               <Button tag={Link} id="cancel-save" to="/sick-leave" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
-                <span className="d-none d-md-inline">Back</span>
+                <span className="d-none d-md-inline">Zurück</span>
               </Button>
               &nbsp;
               <Button color="primary" id="save-entity" type="submit" disabled={updating}>
                 <FontAwesomeIcon icon="save" />
-                &nbsp; Save
+                &nbsp; Speichern
               </Button>
             </AvForm>
           )}

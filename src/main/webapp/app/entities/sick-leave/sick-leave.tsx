@@ -85,14 +85,11 @@ export const SickLeave = (props: ISickLeaveProps) => {
                   ><FontAwesomeIcon icon="trash" />
                   </Button>
                 </div>
-                <div className="card-body">
-                  <p className="card-text">Angestellter: {sickLeave.employee ? <Link to={`employee/${sickLeave.employee.id}`}>{sickLeave.employee.firstName}{sickLeave.employee.lastName}</Link> : ''}</p>
-                </div>
               </div>
             ))}
           </div>
-          <div id="addButton">
-            <Link to={`${match.url}/new`} className="btn btn-primary rounded-circle btn-xl">
+          <div>
+            <Link to={`${match.url}/new`} className="btn rounded-circle btn-xl" id="addButton">
               <FontAwesomeIcon icon="plus" />
             </Link>
           </div>

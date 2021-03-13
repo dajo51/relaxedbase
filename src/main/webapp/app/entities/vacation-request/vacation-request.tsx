@@ -88,14 +88,13 @@ export const VacationRequest = (props: IVacationRequestProps) => {
           </div>
             <div className="card-body">
               <p className="card-text">Status: {vacationRequest.status ? 'Angenommen' : 'Abgelehnt'}</p>
-
               <p className="card-text">Vertretung: {vacationRequest.standIn ? <Link to={`employee/${vacationRequest.standIn.id}`}>{vacationRequest.standIn.firstName} {vacationRequest.standIn.lastName}</Link> : ''}</p>
             </div>
         </div>
           ))}
       </div>
-        <div id="addButton">
-        <Link to={`${match.url}/new`} className="btn btn-primary rounded-circle btn-xl">
+      <div>
+        <Link to={`${match.url}/new`} className="btn rounded-circle btn-xl" id="addButton">
           <FontAwesomeIcon icon="plus" />
         </Link>
       </div>
