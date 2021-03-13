@@ -21,12 +21,7 @@ class LoginModal extends React.Component<ILoginModalProps> {
     const { loginError, handleClose } = this.props;
 
     return (
-      <Modal isOpen={this.props.showModal} toggle={handleClose} backdrop="static" id="login-page" autoFocus={false}>
-        <AvForm onSubmit={this.handleSubmit}>
-          <ModalHeader id="login-title" toggle={handleClose}>
-            Sign in
-          </ModalHeader>
-          <ModalBody>
+          <AvForm onSubmit={this.handleSubmit}>
             <Row>
               <Col md="12">
                 {loginError ? (
@@ -59,24 +54,16 @@ class LoginModal extends React.Component<ILoginModalProps> {
                 </AvGroup>
               </Col>
             </Row>
-            <div className="mt-1">&nbsp;</div>
-            <Alert color="warning">
-              <Link to="/account/reset/request">Did you forget your password?</Link>
-            </Alert>
-            <Alert color="warning">
-              <span>You don&apos;t have an account yet?</span> <Link to="/account/register">Register a new account</Link>
-            </Alert>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="secondary" onClick={handleClose} tabIndex="1">
-              Cancel
-            </Button>{' '}
-            <Button color="primary" type="submit">
-              Sign in
-            </Button>
-          </ModalFooter>
-        </AvForm>
-      </Modal>
+            <Row>
+              <Button color="secondary" onClick={handleClose} tabIndex="1">
+                Cancel
+              </Button>{' '}
+              <Button color="primary" type="submit">
+                Sign in
+              </Button>
+            </Row>
+          </AvForm>
+
     );
   }
 }
