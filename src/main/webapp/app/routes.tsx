@@ -15,7 +15,7 @@ import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
 import PageNotFound from 'app/shared/error/page-not-found';
 import { AUTHORITIES } from 'app/config/constants';
 import Dashboard from 'app/shared/pages/dashboard';
-import Calendar from 'app/shared/pages/calendar';
+import CalendarCard from 'app/shared/pages/calendarCard';
 
 const Account = Loadable({
   loader: () => import(/* webpackChunkName: "account" */ 'app/modules/account'),
@@ -38,7 +38,7 @@ const Routes = () => (
       <ErrorBoundaryRoute path="/account/reset/finish/:key?" component={PasswordResetFinish} />
       <PrivateRoute path="/admin" component={Admin} hasAnyAuthorities={[AUTHORITIES.ADMIN]} />
       <PrivateRoute path="/account" component={Account} hasAnyAuthorities={[AUTHORITIES.ADMIN, AUTHORITIES.USER]} />
-      <PrivateRoute path="/" component={Calendar} hasAnyAuthorities={[AUTHORITIES.USER]} />
+      <PrivateRoute path="/" component={CalendarCard} hasAnyAuthorities={[AUTHORITIES.USER]} />
       <ErrorBoundaryRoute component={PageNotFound} />
     </Switch>
   </div>
