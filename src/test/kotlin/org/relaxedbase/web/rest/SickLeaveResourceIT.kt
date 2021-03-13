@@ -7,13 +7,13 @@ import java.time.ZonedDateTime
 import javax.persistence.EntityManager
 import kotlin.test.assertNotNull
 import org.assertj.core.api.Assertions.assertThat
-import org.hamcrest.Matchers.hasItem
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.MockitoAnnotations
 import org.relaxedbase.RelaxedbaseApp
 import org.relaxedbase.domain.SickLeave
 import org.relaxedbase.repository.SickLeaveRepository
+import org.relaxedbase.service.UserService
 import org.relaxedbase.web.rest.errors.ExceptionTranslator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -48,6 +48,9 @@ class SickLeaveResourceIT {
     private lateinit var sickLeaveRepository: SickLeaveRepository
 
     @Autowired
+    private lateinit var userService: UserService
+
+    @Autowired
     private lateinit var jacksonMessageConverter: MappingJackson2HttpMessageConverter
 
     @Autowired
@@ -69,7 +72,7 @@ class SickLeaveResourceIT {
     @BeforeEach
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        val sickLeaveResource = SickLeaveResource(sickLeaveRepository)
+        val sickLeaveResource = SickLeaveResource(sickLeaveRepository, userService)
          this.restSickLeaveMockMvc = MockMvcBuilders.standaloneSetup(sickLeaveResource)
              .setCustomArgumentResolvers(pageableArgumentResolver)
              .setControllerAdvice(exceptionTranslator)
@@ -123,21 +126,6 @@ class SickLeaveResourceIT {
         val sickLeaveList = sickLeaveRepository.findAll()
         assertThat(sickLeaveList).hasSize(databaseSizeBeforeCreate)
     }
-
-    @Test
-    @Transactional
-    @Throws(Exception::class)
-    fun getAllSickLeaves() {
-        // Initialize the database
-        sickLeaveRepository.saveAndFlush(sickLeave)
-
-        // Get all the sickLeaveList
-        restSickLeaveMockMvc.perform(get("/api/sick-leaves?sort=id,desc"))
-            .andExpect(status().isOk)
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(sickLeave.id?.toInt())))
-            .andExpect(jsonPath("$.[*].startDate").value(hasItem(sameInstant(DEFAULT_START_DATE))))
-            .andExpect(jsonPath("$.[*].endDate").value(hasItem(sameInstant(DEFAULT_END_DATE)))) }
 
     @Test
     @Transactional

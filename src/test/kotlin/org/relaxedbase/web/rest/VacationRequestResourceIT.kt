@@ -7,13 +7,13 @@ import java.time.ZonedDateTime
 import javax.persistence.EntityManager
 import kotlin.test.assertNotNull
 import org.assertj.core.api.Assertions.assertThat
-import org.hamcrest.Matchers.hasItem
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.MockitoAnnotations
 import org.relaxedbase.RelaxedbaseApp
 import org.relaxedbase.domain.VacationRequest
 import org.relaxedbase.repository.VacationRequestRepository
+import org.relaxedbase.service.UserService
 import org.relaxedbase.web.rest.errors.ExceptionTranslator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -48,6 +48,9 @@ class VacationRequestResourceIT {
     private lateinit var vacationRequestRepository: VacationRequestRepository
 
     @Autowired
+    private lateinit var userService: UserService
+
+    @Autowired
     private lateinit var jacksonMessageConverter: MappingJackson2HttpMessageConverter
 
     @Autowired
@@ -69,7 +72,7 @@ class VacationRequestResourceIT {
     @BeforeEach
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        val vacationRequestResource = VacationRequestResource(vacationRequestRepository)
+        val vacationRequestResource = VacationRequestResource(vacationRequestRepository, userService)
          this.restVacationRequestMockMvc = MockMvcBuilders.standaloneSetup(vacationRequestResource)
              .setCustomArgumentResolvers(pageableArgumentResolver)
              .setControllerAdvice(exceptionTranslator)
@@ -124,22 +127,6 @@ class VacationRequestResourceIT {
         val vacationRequestList = vacationRequestRepository.findAll()
         assertThat(vacationRequestList).hasSize(databaseSizeBeforeCreate)
     }
-
-    @Test
-    @Transactional
-    @Throws(Exception::class)
-    fun getAllVacationRequests() {
-        // Initialize the database
-        vacationRequestRepository.saveAndFlush(vacationRequest)
-
-        // Get all the vacationRequestList
-        restVacationRequestMockMvc.perform(get("/api/vacation-requests?sort=id,desc"))
-            .andExpect(status().isOk)
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(vacationRequest.id?.toInt())))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-            .andExpect(jsonPath("$.[*].startDate").value(hasItem(sameInstant(DEFAULT_START_DATE))))
-            .andExpect(jsonPath("$.[*].endDate").value(hasItem(sameInstant(DEFAULT_END_DATE)))) }
 
     @Test
     @Transactional

@@ -23,6 +23,9 @@ data class VacationRequest(
     @Column(name = "end_date")
     var endDate: ZonedDateTime? = null,
 
+    @Column(name = "owner")
+    var owner: String? = null,
+
     @ManyToOne @JsonIgnoreProperties(value = ["vacationRequests"], allowSetters = true)
     var applicant: Employee? = null,
 

@@ -3,7 +3,7 @@ package org.relaxedbase.service
 import io.github.jhipster.security.RandomUtil
 import java.time.Instant
 import java.time.temporal.ChronoUnit
-import java.util.Optional
+import java.util.*
 import org.relaxedbase.config.ANONYMOUS_USER
 import org.relaxedbase.config.DEFAULT_LANGUAGE
 import org.relaxedbase.domain.User
@@ -16,6 +16,9 @@ import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.scheduling.annotation.Scheduled
+import org.springframework.security.core.Authentication
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -252,4 +255,23 @@ class UserService(
     @Transactional(readOnly = true)
     fun getAuthorities() =
         authorityRepository.findAll().asSequence().map { it.name }.filterNotNullTo(mutableListOf())
+
+    fun getCurrentPrincipal(): Optional<String?> {
+        val securityContext = SecurityContextHolder.getContext()
+        return Optional.ofNullable(securityContext.authentication)
+            .map { authentication: Authentication ->
+                if (authentication.principal is UserDetails) {
+                    val springSecurityUser = authentication.principal as UserDetails
+                    return@map springSecurityUser.username
+                } else if (authentication.principal is String) {
+                    return@map authentication.principal as String
+                }
+                null
+            }
+    }
+
+    fun isCurrentAdmin(): Boolean {
+        val securityContext = SecurityContextHolder.getContext()
+        return securityContext.authentication.authorities.stream().anyMatch { t -> t.authority.equals("ROLE_ADMIN") }
+    }
 }
