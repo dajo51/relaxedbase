@@ -17,6 +17,9 @@ data class SickLeave(
     @Column(name = "start_date")
     var startDate: ZonedDateTime? = null,
 
+    @Column(name = "owner")
+    var owner: String? = null,
+
     @Column(name = "end_date")
     var endDate: ZonedDateTime? = null,
 

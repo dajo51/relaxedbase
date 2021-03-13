@@ -7,9 +7,11 @@ import java.net.URI
 import java.net.URISyntaxException
 import org.relaxedbase.domain.VacationRequest
 import org.relaxedbase.repository.VacationRequestRepository
+import org.relaxedbase.service.UserService
 import org.relaxedbase.web.rest.errors.BadRequestAlertException
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
 import org.springframework.transaction.annotation.Transactional
@@ -24,7 +26,8 @@ private const val ENTITY_NAME = "vacationRequest"
 @RequestMapping("/api")
 @Transactional
 class VacationRequestResource(
-    private val vacationRequestRepository: VacationRequestRepository
+    private val vacationRequestRepository: VacationRequestRepository,
+    private val userService: UserService
 ) {
 
     private val log = LoggerFactory.getLogger(javaClass)
@@ -47,6 +50,7 @@ class VacationRequestResource(
                 ENTITY_NAME, "idexists"
             )
         }
+        vacationRequest.owner = userService.getCurrentPrincipal().orElse("")
         val result = vacationRequestRepository.save(vacationRequest)
         return ResponseEntity.created(URI("/api/vacation-requests/${result.id}"))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.id.toString()))
@@ -68,6 +72,7 @@ class VacationRequestResource(
         if (vacationRequest.id == null) {
             throw BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull")
         }
+        vacationRequest.owner = userService.getCurrentPrincipal().orElse("")
         val result = vacationRequestRepository.save(vacationRequest)
         return ResponseEntity.ok()
             .headers(
@@ -88,7 +93,13 @@ class VacationRequestResource(
     @GetMapping("/vacation-requests")
     fun getAllVacationRequests(pageable: Pageable): ResponseEntity<List<VacationRequest>> {
         log.debug("REST request to get a page of VacationRequests")
-        val page = vacationRequestRepository.findAll(pageable)
+        val page: Page<VacationRequest>
+        if (userService.isCurrentAdmin()) {
+            page = vacationRequestRepository.findAll(pageable)
+        } else {
+            page = vacationRequestRepository.findAllByOwner(pageable, userService.getCurrentPrincipal().get())
+        }
+
         val headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page)
         return ResponseEntity.ok().headers(headers).body(page.content)
     }

@@ -7,9 +7,11 @@ import java.net.URI
 import java.net.URISyntaxException
 import org.relaxedbase.domain.SickLeave
 import org.relaxedbase.repository.SickLeaveRepository
+import org.relaxedbase.service.UserService
 import org.relaxedbase.web.rest.errors.BadRequestAlertException
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
 import org.springframework.transaction.annotation.Transactional
@@ -24,7 +26,8 @@ private const val ENTITY_NAME = "sickLeave"
 @RequestMapping("/api")
 @Transactional
 class SickLeaveResource(
-    private val sickLeaveRepository: SickLeaveRepository
+    private val sickLeaveRepository: SickLeaveRepository,
+    private val userService: UserService
 ) {
 
     private val log = LoggerFactory.getLogger(javaClass)
@@ -47,6 +50,7 @@ class SickLeaveResource(
                 ENTITY_NAME, "idexists"
             )
         }
+        sickLeave.owner = userService.getCurrentPrincipal().orElse("")
         val result = sickLeaveRepository.save(sickLeave)
         return ResponseEntity.created(URI("/api/sick-leaves/${result.id}"))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.id.toString()))
@@ -68,6 +72,7 @@ class SickLeaveResource(
         if (sickLeave.id == null) {
             throw BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull")
         }
+        sickLeave.owner = userService.getCurrentPrincipal().orElse("")
         val result = sickLeaveRepository.save(sickLeave)
         return ResponseEntity.ok()
             .headers(
@@ -88,7 +93,12 @@ class SickLeaveResource(
     @GetMapping("/sick-leaves")
     fun getAllSickLeaves(pageable: Pageable): ResponseEntity<List<SickLeave>> {
         log.debug("REST request to get a page of SickLeaves")
-        val page = sickLeaveRepository.findAll(pageable)
+        val page: Page<SickLeave>
+        if (userService.isCurrentAdmin()) {
+            page = sickLeaveRepository.findAll(pageable)
+        } else {
+            page = sickLeaveRepository.findAllByOwner(pageable, userService.getCurrentPrincipal().get())
+        }
         val headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page)
         return ResponseEntity.ok().headers(headers).body(page.content)
     }

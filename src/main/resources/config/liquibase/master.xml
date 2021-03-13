@@ -23,6 +23,8 @@
     <include file="config/liquibase/changelog/20210312165733_added_entity_constraints_SickLeave.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210312165833_added_entity_constraints_Event.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210312165933_added_entity_constraints_Employee.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210313132922_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210313141549_changelog.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>
