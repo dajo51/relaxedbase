@@ -144,7 +144,7 @@ export const EventUpdate = (props: IEventUpdateProps) => {
                 </AvInput>
               </AvGroup>
               <AvGroup>
-                <Label for="event-host">Veranstaltung</Label>
+                <Label for="event-host">Veranstalter</Label>
                 <AvInput id="event-host" type="select" className="form-control" name="host.id">
                   <option value="" key="0" />
                   {employees

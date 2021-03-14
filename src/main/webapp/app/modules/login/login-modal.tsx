@@ -33,8 +33,8 @@ class LoginModal extends React.Component<ILoginModalProps> {
               <Col md="12">
                 <AvField
                   name="username"
-                  label="Username"
-                  placeholder="Your username"
+                  label="Benutzername"
+                  placeholder="Dein Benutzername"
                   required
                   errorMessage="Username cannot be empty!"
                   autoFocus
@@ -42,24 +42,24 @@ class LoginModal extends React.Component<ILoginModalProps> {
                 <AvField
                   name="password"
                   type="password"
-                  label="Password"
-                  placeholder="Your password"
+                  label="Passwort"
+                  placeholder="Dein Passwort"
                   required
                   errorMessage="Password cannot be empty!"
                 />
                 <AvGroup check inline>
                   <Label className="form-check-label">
-                    <AvInput type="checkbox" name="rememberMe" /> Remember me
+                    <AvInput type="checkbox" name="rememberMe" /> Benutzernamen speichern
                   </Label>
                 </AvGroup>
               </Col>
             </Row>
             <Row>
               <Button color="secondary" onClick={handleClose} tabIndex="1">
-                Cancel
+                Abbrechen
               </Button>{' '}
               <Button color="primary" type="submit">
-                Sign in
+                Einloggen
               </Button>
             </Row>
           </AvForm>
