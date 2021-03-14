@@ -33,16 +33,16 @@ export const EmployeeDeleteDialog = (props: IEmployeeDeleteDialogProps) => {
   const { employeeEntity } = props;
   return (
     <Modal isOpen toggle={handleClose}>
-      <ModalHeader toggle={handleClose}>Confirm delete operation</ModalHeader>
-      <ModalBody id="relaxedbaseApp.employee.delete.question">Are you sure you want to delete this Employee?</ModalBody>
+      <ModalHeader toggle={handleClose}>Bestätigung</ModalHeader>
+      <ModalBody id="relaxedbaseApp.employee.delete.question">Bist du dir sicher, dass du den Mitarbeiter löschen möchtest?</ModalBody>
       <ModalFooter>
         <Button color="secondary" onClick={handleClose}>
           <FontAwesomeIcon icon="ban" />
-          &nbsp; Cancel
+          &nbsp; Abbrechen
         </Button>
         <Button id="jhi-confirm-delete-employee" color="danger" onClick={confirmDelete}>
           <FontAwesomeIcon icon="trash" />
-          &nbsp; Delete
+          &nbsp; Löschen
         </Button>
       </ModalFooter>
     </Modal>

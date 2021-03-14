@@ -32,13 +32,13 @@ export const SettingsPage = (props: IUserSettingsProps) => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="settings-title">User settings for {props.account.login}</h2>
+          <h2 id="settings-title">Einstellungen für {props.account.login}</h2>
           <AvForm id="settings-form" onValidSubmit={handleValidSubmit}>
             {/* First name */}
             <AvField
               className="form-control"
-              name="firstName"
-              label="First Name"
+              name="Vorname"
+              label="Vorname"
               id="firstName"
               placeholder="Your first name"
               validate={{
@@ -51,8 +51,8 @@ export const SettingsPage = (props: IUserSettingsProps) => {
             {/* Last name */}
             <AvField
               className="form-control"
-              name="lastName"
-              label="Last Name"
+              name="Nachname"
+              label="Nachname"
               id="lastName"
               placeholder="Your last name"
               validate={{
@@ -76,7 +76,7 @@ export const SettingsPage = (props: IUserSettingsProps) => {
               value={props.account.email}
             />
             <Button color="primary" type="submit">
-              Save
+              Speichern
             </Button>
           </AvForm>
         </Col>

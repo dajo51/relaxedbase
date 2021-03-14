@@ -60,7 +60,7 @@ export const EmployeeUpdate = (props: IEmployeeUpdateProps) => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="relaxedbaseApp.employee.home.createOrEditLabel">Create or edit a Employee</h2>
+          <h2 id="relaxedbaseApp.employee.home.createOrEditLabel">Erstelle oder bearbeite einen Mitarbeiter</h2>
         </Col>
       </Row>
       <Row className="justify-content-center">
@@ -77,13 +77,13 @@ export const EmployeeUpdate = (props: IEmployeeUpdateProps) => {
               ) : null}
               <AvGroup>
                 <Label id="firstNameLabel" for="employee-firstName">
-                  First Name
+                  Vorname
                 </Label>
                 <AvField id="employee-firstName" type="text" name="firstName" />
               </AvGroup>
               <AvGroup>
                 <Label id="lastNameLabel" for="employee-lastName">
-                  Last Name
+                  Nachname
                 </Label>
                 <AvField id="employee-lastName" type="text" name="lastName" />
               </AvGroup>
@@ -95,7 +95,7 @@ export const EmployeeUpdate = (props: IEmployeeUpdateProps) => {
               </AvGroup>
               <AvGroup>
                 <Label id="phoneNumberLabel" for="employee-phoneNumber">
-                  Phone Number
+                  Telefon
                 </Label>
                 <AvField id="employee-phoneNumber" type="text" name="phoneNumber" />
               </AvGroup>
@@ -121,12 +121,12 @@ export const EmployeeUpdate = (props: IEmployeeUpdateProps) => {
               <Button tag={Link} id="cancel-save" to="/employee" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
-                <span className="d-none d-md-inline">Back</span>
+                <span className="d-none d-md-inline">Zurück</span>
               </Button>
               &nbsp;
               <Button color="primary" id="save-entity" type="submit" disabled={updating}>
                 <FontAwesomeIcon icon="save" />
-                &nbsp; Save
+                &nbsp; Speichern
               </Button>
             </AvForm>
           )}

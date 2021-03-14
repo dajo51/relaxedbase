@@ -33,16 +33,16 @@ export const EventDeleteDialog = (props: IEventDeleteDialogProps) => {
   const { eventEntity } = props;
   return (
     <Modal isOpen toggle={handleClose}>
-      <ModalHeader toggle={handleClose}>Confirm delete operation</ModalHeader>
-      <ModalBody id="relaxedbaseApp.event.delete.question">Are you sure you want to delete this Event?</ModalBody>
+      <ModalHeader toggle={handleClose}>Bestätigung</ModalHeader>
+      <ModalBody id="relaxedbaseApp.event.delete.question">Bist du dir sicher, dass du die Veranstaltung löschen möchtest?</ModalBody>
       <ModalFooter>
         <Button color="secondary" onClick={handleClose}>
           <FontAwesomeIcon icon="ban" />
-          &nbsp; Cancel
+          &nbsp; Abbrechen
         </Button>
         <Button id="jhi-confirm-delete-event" color="danger" onClick={confirmDelete}>
           <FontAwesomeIcon icon="trash" />
-          &nbsp; Delete
+          &nbsp; Löschen
         </Button>
       </ModalFooter>
     </Modal>

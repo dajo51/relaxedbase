@@ -68,11 +68,7 @@ export const Event = (props: IEventProps) => {
   return (
     <div>
       <h2 id="event-heading">
-        Events
-        <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-          <FontAwesomeIcon icon="plus" />
-          &nbsp; Create new Event
-        </Link>
+        Veranstaltungen
       </h2>
       <div className="table-responsive">
         {eventList && eventList.length > 0 ? (
@@ -153,8 +149,13 @@ export const Event = (props: IEventProps) => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Events found</div>
+          !loading && <div className="alert alert-warning">Keine Veranstaltungen gefunden :(</div>
         )}
+      </div>
+      <div>
+        <Link to={`${match.url}/new`} className="btn rounded-circle btn-xl" id="addButton">
+          <FontAwesomeIcon icon="plus" />
+        </Link>
       </div>
       {props.totalItems ? (
         <div className={eventList && eventList.length > 0 ? '' : 'd-none'}>

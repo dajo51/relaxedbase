@@ -68,11 +68,7 @@ export const Employee = (props: IEmployeeProps) => {
   return (
     <div>
       <h2 id="employee-heading">
-        Employees
-        <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-          <FontAwesomeIcon icon="plus" />
-          &nbsp; Create new Employee
-        </Link>
+        Mitarbeiter
       </h2>
       <div className="table-responsive">
         {employeeList && employeeList.length > 0 ? (
@@ -80,19 +76,19 @@ export const Employee = (props: IEmployeeProps) => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon="sort" />
+                  Mitarbeiter ID <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('firstName')}>
-                  First Name <FontAwesomeIcon icon="sort" />
+                  Vorname <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('lastName')}>
-                  Last Name <FontAwesomeIcon icon="sort" />
+                  Nachname <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('email')}>
                   Email <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('phoneNumber')}>
-                  Phone Number <FontAwesomeIcon icon="sort" />
+                  Telefon <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('team')}>
                   Team <FontAwesomeIcon icon="sort" />
@@ -120,7 +116,7 @@ export const Employee = (props: IEmployeeProps) => {
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${employee.id}`} color="info" size="sm">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                        <FontAwesomeIcon icon="eye" /> <span className='d-none d-md-inline'/>
                       </Button>
                       <Button
                         tag={Link}
@@ -128,7 +124,7 @@ export const Employee = (props: IEmployeeProps) => {
                         color="primary"
                         size="sm"
                       >
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                        <FontAwesomeIcon icon="pencil-alt" /> <span className='d-none d-md-inline'/>
                       </Button>
                       <Button
                         tag={Link}
@@ -136,7 +132,7 @@ export const Employee = (props: IEmployeeProps) => {
                         color="danger"
                         size="sm"
                       >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                        <FontAwesomeIcon icon="trash" /> <span className='d-none d-md-inline'/>
                       </Button>
                     </div>
                   </td>
@@ -145,8 +141,13 @@ export const Employee = (props: IEmployeeProps) => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Employees found</div>
+          !loading && <div className="alert alert-warning">Ganz schön leer hier!</div>
         )}
+      </div>
+      <div>
+        <Link to={`${match.url}/new`} className="btn rounded-circle btn-xl" id="addButton">
+          <FontAwesomeIcon icon="plus" />
+        </Link>
       </div>
       {props.totalItems ? (
         <div className={employeeList && employeeList.length > 0 ? '' : 'd-none'}>

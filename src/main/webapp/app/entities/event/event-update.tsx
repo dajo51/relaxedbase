@@ -65,7 +65,7 @@ export const EventUpdate = (props: IEventUpdateProps) => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="relaxedbaseApp.event.home.createOrEditLabel">Create or edit a Event</h2>
+          <h2 id="relaxedbaseApp.event.home.createOrEditLabel">Erstelle oder bearbeite eine Veranstaltung</h2>
         </Col>
       </Row>
       <Row className="justify-content-center">
@@ -82,25 +82,25 @@ export const EventUpdate = (props: IEventUpdateProps) => {
               ) : null}
               <AvGroup>
                 <Label id="titleLabel" for="event-title">
-                  Title
+                  Veranstaltungstitel
                 </Label>
                 <AvField id="event-title" type="text" name="title" />
               </AvGroup>
               <AvGroup>
                 <Label id="descriptionLabel" for="event-description">
-                  Description
+                  Beschreibung
                 </Label>
                 <AvField id="event-description" type="text" name="description" />
               </AvGroup>
               <AvGroup>
                 <Label id="locationLabel" for="event-location">
-                  Location
+                  Ort
                 </Label>
                 <AvField id="event-location" type="text" name="location" />
               </AvGroup>
               <AvGroup>
                 <Label id="startDateLabel" for="event-startDate">
-                  Start Date
+                  Startdatum
                 </Label>
                 <AvInput
                   id="event-startDate"
@@ -113,7 +113,7 @@ export const EventUpdate = (props: IEventUpdateProps) => {
               </AvGroup>
               <AvGroup>
                 <Label id="endDateLabel" for="event-endDate">
-                  End Date
+                  Enddatum
                 </Label>
                 <AvInput
                   id="event-endDate"
@@ -127,11 +127,11 @@ export const EventUpdate = (props: IEventUpdateProps) => {
               <AvGroup check>
                 <Label id="inviteOnlyLabel">
                   <AvInput id="event-inviteOnly" type="checkbox" className="form-check-input" name="inviteOnly" />
-                  Invite Only
+                  Nur mit Einladung
                 </Label>
               </AvGroup>
               <AvGroup>
-                <Label for="event-participant">Participant</Label>
+                <Label for="event-participant">Teilnehmer</Label>
                 <AvInput id="event-participant" type="select" className="form-control" name="participant.id">
                   <option value="" key="0" />
                   {employees
@@ -144,7 +144,7 @@ export const EventUpdate = (props: IEventUpdateProps) => {
                 </AvInput>
               </AvGroup>
               <AvGroup>
-                <Label for="event-host">Host</Label>
+                <Label for="event-host">Veranstaltung</Label>
                 <AvInput id="event-host" type="select" className="form-control" name="host.id">
                   <option value="" key="0" />
                   {employees
@@ -159,12 +159,12 @@ export const EventUpdate = (props: IEventUpdateProps) => {
               <Button tag={Link} id="cancel-save" to="/event" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
-                <span className="d-none d-md-inline">Back</span>
+                <span className="d-none d-md-inline">Zurück</span>
               </Button>
               &nbsp;
               <Button color="primary" id="save-entity" type="submit" disabled={updating}>
                 <FontAwesomeIcon icon="save" />
-                &nbsp; Save
+                &nbsp; Speichern
               </Button>
             </AvForm>
           )}

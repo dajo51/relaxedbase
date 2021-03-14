@@ -33,16 +33,16 @@ export const SickLeaveDeleteDialog = (props: ISickLeaveDeleteDialogProps) => {
   const { sickLeaveEntity } = props;
   return (
     <Modal isOpen toggle={handleClose}>
-      <ModalHeader toggle={handleClose}>Confirm delete operation</ModalHeader>
-      <ModalBody id="relaxedbaseApp.sickLeave.delete.question">Are you sure you want to delete this SickLeave?</ModalBody>
+      <ModalHeader toggle={handleClose}>Bestätigung</ModalHeader>
+      <ModalBody id="relaxedbaseApp.sickLeave.delete.question">Bist du dir sicher, dass du deine Krankschreibung löschen möchtest?</ModalBody>
       <ModalFooter>
         <Button color="secondary" onClick={handleClose}>
           <FontAwesomeIcon icon="ban" />
-          &nbsp; Cancel
+          &nbsp; Abbrechen
         </Button>
         <Button id="jhi-confirm-delete-sickLeave" color="danger" onClick={confirmDelete}>
           <FontAwesomeIcon icon="trash" />
-          &nbsp; Delete
+          &nbsp; Löschen
         </Button>
       </ModalFooter>
     </Modal>
