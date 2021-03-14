@@ -6,7 +6,7 @@ See https://sites.google.com/relaxdays.de/hackathon-relaxdays/startseite for mor
 
 Our participant IDs in the challenge were: CC-VOL1-27, CC-VOL1-61
 
-Demo video under realeases.
+Demo video under releases.
 
 To build:
 
